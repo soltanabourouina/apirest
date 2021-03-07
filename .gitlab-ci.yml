@@ -1,0 +1,14 @@
+default:
+image: node:12.18.4-buster
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm/
+
+tests:
+  script:
+   - npm ci --cache .npm --prefer-offline
+   - npm run test:ci
+
